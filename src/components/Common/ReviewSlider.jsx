@@ -38,22 +38,34 @@ function ReviewSlider() {
   return (
     <div className="text-white">
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
-        <Swiper
-          slidesPerView={4}
+      <Swiper
+          slidesPerView={1}
           spaceBetween={25}
           loop={true}
+          modules={[FreeMode, Pagination]}
           freeMode={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
-          modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          breakpoints={{
+            700: {
+              slidesPerView: 2,
+              loop: true
+            },
+            1024: {
+              slidesPerView: 3,
+              loop: true
+            }
+          }}
+        //   modules={[FreeMode, Pagination, Autoplay]}
+          className="w-[100vw] "
         >
           {reviews.map((review, i) => {
             return (
+              
               <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25 w-full">
                   <div className="flex items-center gap-4">
                     <img
                       src={
@@ -71,7 +83,7 @@ function ReviewSlider() {
                       </h2>
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25">
+                  <p className="font-medium text-richblack-25 min-h-[80px]">
                     {review?.review.split(" ").length > truncateWords
                       ? `${review?.review
                           .split(" ")
